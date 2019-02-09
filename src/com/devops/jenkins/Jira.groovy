@@ -4,7 +4,6 @@ import groovy.json.JsonSlurper
 
 class Jira {
 
-
     @NonCPS
     def createIssue(Map settings) {
         def requiredFields = ['project', 'reporter', 'appname', 'version', 'issuetype']

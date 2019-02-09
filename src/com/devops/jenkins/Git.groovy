@@ -2,7 +2,6 @@ package com.devops.jenkins
 
 class Git {
 
-
     def getChangesSinceLastBuild() {
         def changes = []
         def changeLogSets = currentBuild.rawBuild.changeSets

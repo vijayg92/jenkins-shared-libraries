@@ -2,12 +2,12 @@ package com.devops.jenkins
 
 class CodeQuality {
 
-    private String sonarArgs = '-Dsonar.sources=src/main/java/ -Dsonar.projectKey=org.sonarqube:PaymentCard -Dsonar.projectName=PaymentCard -Dsonar.projectVersion=1.0.0  -Dsonar.java.binaries=.'
-
-    static def runSonarScan(sonarArgs){
-    def sonarHome = tool 'sonar'
-        withSonarQubeEnv(sonarHome) {
-            def returnStatus = script.sh returnStdout: true, script: """${sonarHome}/bin/sonar-scanner -X ${sonarArgs}"""
+    static def runSonarScan(script, args){
+        if (!args) throw new IllegalArgumentException("The parameter 'args' can not be null or empty.")
+        try {
+		    script.sh "${script.tool 'sonar'}/bin/sonar-scanner -X ${args}"
+        } catch(err) {
+            throw(err)
         }
     }
 }
