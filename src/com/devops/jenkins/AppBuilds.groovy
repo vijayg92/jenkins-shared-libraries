@@ -1,14 +1,11 @@
 package com.devops.jenkins
 
-class AppBuilds implements Serializable {
+class AppBuilds {
     
-    static def buildWithMaven(script, mvnConfigFilePath){
+    static def buildWithMaven(script, mvnConfigFilePath, args){
         if (!mvnConfigFilePath) throw new IllegalArgumentException("The parameter 'mvnConfigFilePath' can not be null or empty.")
         try {
-            def mvnHome = tool 'maven-3.3.9'
-            withMaven(maven: mvnHome, mavenSettingsConfig: mvnConfigFilePath) {
-                def returnStatus = script.sh returnStdout: true, script: """${mvnHome}/bin/mvn -X -e ${mvnConfigFilePath} clean install"""
-            }
+		    script.sh "${script.tool 'maven-3.3.9'}/bin/mvn -s ${mvnConfigFilePath} -o ${args}"
         } catch(err) {
             throw(err)
         }
