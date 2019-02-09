@@ -1,4 +1,4 @@
-package com.redhat.jenkins.pipeline
+package com.devops.jenkins
 
 class Git {
 

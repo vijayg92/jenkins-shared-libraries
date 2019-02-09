@@ -1,15 +1,17 @@
-import com.redhat.jenkins.pipeline.*
+import com.devops.jenkins.AppBuilds
+import com.devops.jenkins.CodeQuality
+import com.devops.jenkins.Openshiftv3
+import com.devops.jenkins.Jira
+import com.devops.jenkins.Notifications
 
 def notifyUtils = new Notifications()
-def jiraUtils = new Jira()
-def openshiftUtils = new Openshiftv3()
-def gitUtils = new Git()
+def buildUtils = new AppBuilds()
 
 def developers_slack = "#search-ci-devs"
 def approvers_slack = "#search-ci-releases"
 def devops_slack = "#ci-releases-devops"
-def approvers = "vgosai, ngoswami, breddy, jared"
-def dev_team = "rutvij, mani, sushsil, flossy"
+def approvers = "approver1, approver2, approver3, approver4"
+def dev_team = "mydev@redhat.com"
 
 try {
 

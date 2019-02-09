@@ -1,16 +1,15 @@
-package com.redhat.jenkins.pipeline
+package com.devops.jenkins
 
 class Notifications {
 
-    private String buildStatus // Status of the Jenkins Build
-    private String slackChannel // Slack Channel to send notifications
-    private String approvers // List of Approvers who approve/promote the Builds
-    private String developers // List of Developers
-    private String devops // List of DevOps Members
-    private String devTeamEmails    // Developers distribution list (Group Email)
-    private String approversEmails // Promoters distribution list (Group Email)
-    private String devOpsTeamEmails // DevOps team distribution list (Group Email)
-
+    private String buildStatus
+    private String slackChannel
+    private String approvers
+    private String developers
+    private String devops
+    private String devTeamEmails
+    private String approversEmails
+    private String devOpsTeamEmails
 
     def notifyDeveloperBySlack(buildStatus, slackChannel){
         // build status of null means successful

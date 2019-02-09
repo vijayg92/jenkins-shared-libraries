@@ -1,4 +1,4 @@
-package com.redhat.jenkins.pipeline
+package com.devops.jenkins
 
 import groovy.json.JsonSlurper
 
