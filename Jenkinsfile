@@ -1,3 +1,5 @@
+@Library('jenkins-shared-library')_
+
 import com.devops.jenkins.AppBuilds
 import com.devops.jenkins.CodeQuality
 import com.devops.jenkins.Openshiftv3
@@ -5,13 +7,15 @@ import com.devops.jenkins.Jira
 import com.devops.jenkins.Notifications
 
 def notifyUtils = new Notifications()
-def buildUtils = new AppBuilds()
+def appUtils = new AppBuilds()
 
 def developers_slack = "#search-ci-devs"
 def approvers_slack = "#search-ci-releases"
 def devops_slack = "#ci-releases-devops"
 def approvers = "approver1, approver2, approver3, approver4"
 def dev_team = "mydev@redhat.com"
+
+def mvncfgfile = "globalMavenConfig"
 
 try {
 
@@ -22,7 +26,7 @@ try {
             notifyUtils.notifyDeveloperBySlack(currentBuild.result, developers_slack)
 
             stage("Build") {
-
+                appUtils.buildWithMaven(this, mvncfgfile, 'clean install')
             }
 
             stage("Test"){
