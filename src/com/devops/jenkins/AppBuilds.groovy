@@ -1,30 +1,25 @@
 package com.devops.jenkins
 
-class AppBuilds {
-    
-    static def buildWithMaven(script, mvnConfigFilePath, args){
-        if (!mvnConfigFilePath) throw new IllegalArgumentException("The parameter 'mvnConfigFilePath' can not be null or empty.")
-        try {
-		    script.sh "${script.tool 'maven'}/bin/mvn -s ${mvnConfigFilePath} -o ${args}"
-        } catch(err) {
-            throw(err)
+class AppBuilds implements Serializable {
+
+    def steps 
+
+    AppBuilds(steps){
+        this.steps = steps
+    }
+
+    def buildWithMaven(mvnArgs){
+        def mvn = steps.tool 'maven'
+        steps.withMaven(maven: 'maven', mavenLocalRepo: '.m2'){
+            steps.sh "${mvn}/bin/mvn -o ${mvnArgs}"
         }
     }
 
-    def buildWithGradle() {
-    
+    def buildWithGradle(){
+
     }
 
     def buildWithGrunt(){
-    
-    }
 
-    def buildWithNpm(){
-    
     }
-
-    def buildWithPip(){
-    
-    }
-
 }
